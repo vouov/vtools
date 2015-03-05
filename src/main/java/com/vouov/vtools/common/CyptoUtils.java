@@ -216,29 +216,72 @@ public class CyptoUtils {
         return encodeHexString(updateDigest(digest, salt).digest());
     }
 
-    public static String encodeAES(String data, String password, String iv) throws Exception {
-        KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        kgen.init(128, new SecureRandom(password.getBytes()));
-        SecretKey secretKey = kgen.generateKey();
-        byte[] enCodeFormat = secretKey.getEncoded();
-        SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
-        Cipher cipher = Cipher.getInstance("AES");// 创建密码器
-        byte[] byteContent = data.getBytes("utf-8");
-        cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化
-        byte[] result = cipher.doFinal(byteContent);
-        return new String(result); // 加密
+    /**
+     * aes加密、解密方法
+     *
+     * @param mode
+     * @param data
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    public static byte[] aes(int mode, byte[] data, String password) throws Exception {
+        //密钥生成
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(128, new SecureRandom(StringUtils.getBytesUtf8(password)));
+        SecretKey secretKey = keyGenerator.generateKey();
+        byte[] encodedKey = secretKey.getEncoded();
+        //加密
+        SecretKeySpec key = new SecretKeySpec(encodedKey, "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(mode, key);
+        return cipher.doFinal(data);
     }
 
-    public static String decodeAES(String data, String password, String iv) throws Exception {
-        KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        kgen.init(128, new SecureRandom(password.getBytes()));
-        SecretKey secretKey = kgen.generateKey();
-        byte[] enCodeFormat = secretKey.getEncoded();
-        SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
-        Cipher cipher = Cipher.getInstance("AES");// 创建密码器
-        cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
-        byte[] result = cipher.doFinal(data.getBytes());
-        return StringUtils.newStringUtf8(result); // 加密
+    /**
+     * AES加密
+     * 结果经过Base64处理
+     *
+     * @param data
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    public static String encodeAES(String data, String password) throws Exception {
+        return Base64.encode(aes(Cipher.ENCRYPT_MODE, StringUtils.getBytesUtf8(data), password));
+    }
+
+
+    /**
+     * AES解密
+     *
+     * @param data
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    public static String decodeAES(String data, String password) throws Exception {
+        return StringUtils.newStringUtf8(aes(Cipher.DECRYPT_MODE, Base64.decode(data), password));
+    }
+
+    /**
+     * 兼容PHP等其他语言AES加密、解密方法
+     *
+     * @param mode
+     * @param data
+     * @param password
+     * @param iv
+     * @return
+     * @throws Exception
+     */
+    public static byte[] aesZeroPadding(int mode, byte[] data, String password, String iv) throws Exception {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(StringUtils.getBytesUtf8(md5(password).substring(0, 16)), "AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(StringUtils.getBytesUtf8(md5(iv).substring(0, 16)));
+        cipher.init(mode, secretKeySpec, ivParameterSpec);
+
+        return cipher.doFinal(data);
     }
 
     /**
@@ -250,13 +293,9 @@ public class CyptoUtils {
      * @return
      * @throws Exception
      */
-    public static String encodeAESZeroPadding(String data, String password, String iv) throws Exception {
+    public static String encodeAESZeroPadding(String data, String password, String iv) {
         try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(StringUtils.getBytesIso8859_1(md5(password)), "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(StringUtils.getBytesIso8859_1(md5(iv)));
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
-
             //对内容不是16整数倍数时补位
             int blockSize = cipher.getBlockSize();
             byte[] bytes = StringUtils.getBytesUtf8(data);
@@ -267,10 +306,7 @@ public class CyptoUtils {
             }
             byte[] newBytes = new byte[dataBytesLength];
             System.arraycopy(bytes, 0, newBytes, 0, bytes.length);
-
-
-            byte[] result = cipher.doFinal(bytes);
-            return Base64.encode(result);
+            return Base64.encode(aesZeroPadding(Cipher.ENCRYPT_MODE, newBytes, password, iv));
         } catch (Exception e) {
             logger.error("AES ZeroPadding模式加密失败", e);
             throw new RuntimeException(e);
@@ -286,16 +322,22 @@ public class CyptoUtils {
      * @return
      * @throws Exception
      */
-    public static String decodeAESZeroPadding(String data, String password, String iv) throws Exception {
+    public static String decodeAESZeroPadding(String data, String password, String iv) {
         try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(StringUtils.getBytesIso8859_1(md5(password)), "AES");
-            Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(StringUtils.getBytesIso8859_1(md5(iv)));
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);// 初始化
+            byte[] decodedBytes = aesZeroPadding(Cipher.DECRYPT_MODE, Base64.decode(data), password, iv);
+            int emptyLength = 0;
 
-            byte[] bytes = Base64.decode(data);
-            byte[] result = cipher.doFinal(bytes);
-            return StringUtils.newStringUtf8(result);
+            for (int i = decodedBytes.length; i > 0; i--) {
+
+                if (decodedBytes[i - 1] == 0) {
+                    emptyLength++;
+                } else {
+                    break;
+                }
+            }
+            byte[] newBytes = new byte[decodedBytes.length - emptyLength];
+            System.arraycopy(decodedBytes, 0, newBytes, 0, decodedBytes.length - emptyLength);
+            return StringUtils.newStringUtf8(newBytes);
         } catch (Exception e) {
             logger.error("AES ZeroPadding模式解密失败", e);
             throw new RuntimeException(e);
