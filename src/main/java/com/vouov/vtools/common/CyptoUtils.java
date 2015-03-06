@@ -369,30 +369,30 @@ public class CyptoUtils {
     }
 
     /**
-     * 对私钥RSA加密后的密文进行签名
+     * 用私钥RSA签名明文
      *
-     * @param encodedData
+     * @param data
      * @param privateKey
      * @return
      * @throws Exception
      */
-    public static String signRSA(String encodedData, String privateKey) throws Exception {
+    public static String signRSA(String data, String privateKey) throws Exception {
         PrivateKey key = RSAUtils.loadPrivateKey(privateKey);
-       return RSAUtils.sign(Base64.decode(encodedData), key);
+       return RSAUtils.sign(StringUtils.getBytesUtf8(data), key);
     }
 
     /**
-     * 对私钥RSA加密后的密文通过公钥和签名验证是否被篡改
+     * 通过公钥和签名验证数据是否被篡改
      *
-     * @param encodedData
+     * @param data
      * @param publicKey
      * @param sign
      * @return
      * @throws Exception
      */
-    public static boolean verifyRSA(String encodedData, String publicKey, String sign) throws Exception {
+    public static boolean verifyRSA(String data, String publicKey, String sign) throws Exception {
         PublicKey key = RSAUtils.loadPublicKey(publicKey);
-        return RSAUtils.verify(Base64.decode(encodedData), key, sign);
+        return RSAUtils.verify(StringUtils.getBytesUtf8(data), key, sign);
     }
 
     /**
