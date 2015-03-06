@@ -12,9 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 
 /**
  * 加密工具类，支持的算法如下：
@@ -325,8 +323,8 @@ public class CyptoUtils {
     public static String decodeAESZeroPadding(String data, String password, String iv) {
         try {
             byte[] decodedBytes = aesZeroPadding(Cipher.DECRYPT_MODE, Base64.decode(data), password, iv);
+            //去除增加的zero padding
             int emptyLength = 0;
-
             for (int i = decodedBytes.length; i > 0; i--) {
 
                 if (decodedBytes[i - 1] == 0) {
@@ -344,11 +342,66 @@ public class CyptoUtils {
         }
     }
 
-    public static String encodeRSA(String data) {
-        return null;
+    /**
+     * 通过公钥RSA加密明文
+     *
+     * @param data
+     * @param publicKey
+     * @return
+     * @throws Exception
+     */
+    public static String encodeRSA(String data, String publicKey) throws Exception {
+        PublicKey key = RSAUtils.loadPublicKey(publicKey);
+        return Base64.encode(RSAUtils.encryptByPublicKey(StringUtils.getBytesUtf8(data), key));
     }
 
-    public static String decodeRSA(String data) {
-        return null;
+    /**
+     * 通过私钥RSA解密密文
+     *
+     * @param data
+     * @param privateKey
+     * @return
+     * @throws Exception
+     */
+    public static String decodeRSA(String data, String privateKey) throws Exception {
+        PrivateKey key = RSAUtils.loadPrivateKey(privateKey);
+        return StringUtils.newStringUtf8(RSAUtils.decryptByPrivateKey(Base64.decode(data), key));
+    }
+
+    /**
+     * 对私钥RSA加密后的密文进行签名
+     *
+     * @param encodedData
+     * @param privateKey
+     * @return
+     * @throws Exception
+     */
+    public static String signRSA(String encodedData, String privateKey) throws Exception {
+        PrivateKey key = RSAUtils.loadPrivateKey(privateKey);
+       return RSAUtils.sign(Base64.decode(encodedData), key);
+    }
+
+    /**
+     * 对私钥RSA加密后的密文通过公钥和签名验证是否被篡改
+     *
+     * @param encodedData
+     * @param publicKey
+     * @param sign
+     * @return
+     * @throws Exception
+     */
+    public static boolean verifyRSA(String encodedData, String publicKey, String sign) throws Exception {
+        PublicKey key = RSAUtils.loadPublicKey(publicKey);
+        return RSAUtils.verify(Base64.decode(encodedData), key, sign);
+    }
+
+    /**
+     * 生成RSA的公钥和私钥对
+     *
+     * @return
+     * @throws Exception
+     */
+    public static KeyPair generateRSAKeyPair() throws Exception {
+        return RSAUtils.generateKeyPair();
     }
 }

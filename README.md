@@ -21,4 +21,12 @@
 
  * **AES**
 
+    支持AES/CBC/ZeroPadding,兼容JS，PHP等其他语言AES加密
+
  * **RSA**
+
+    提供android和j2se兼容的RSA加密解密
+
+    支持RSA的加密，签名，签名验证，解密
+
+    支持生成RSA的密钥对
