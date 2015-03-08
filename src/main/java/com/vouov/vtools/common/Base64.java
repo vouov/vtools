@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author yuml
+ * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class Base64 {

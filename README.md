@@ -35,6 +35,12 @@
 
  * **Excel工具类**
 
+    支持从Excel模板生成对应的Excel文档
+
  * **Word工具类**
 
+    支持html转word
+
  * **Pdf工具类**
+
+    支持html转PDF

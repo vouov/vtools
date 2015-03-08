@@ -6,7 +6,7 @@ import java.nio.charset.Charset;
 /**
  * 字符操作工具类
  *
- * @author yuml
+ * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class StringUtils {

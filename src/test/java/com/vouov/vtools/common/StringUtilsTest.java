@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author yuml
+ * @author yuminglong@gmail.com
  * @date 2015/3/5
  */
 public class StringUtilsTest {

@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.security.KeyPair;
 
 /**
- * @author yuml
+ * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class CyptoUtilsTest {

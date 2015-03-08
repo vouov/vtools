@@ -23,7 +23,7 @@ import java.security.*;
  * <li>aes</li>
  * </ul>
  *
- * @author yuml
+ * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class CyptoUtils {
