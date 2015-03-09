@@ -1,33 +1,27 @@
 package com.vouov.vtools.document;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class ExcelUtils {
-    /*public static String getJSONValue(JSONObject jsonObject, String key) {
-        String value = null;
-        String[] strings = key.split("\\.");
-        JSONObject object = jsonObject;
-        if (strings != null && strings.length > 0) {
-            for (int i = 0; i < strings.length; i++) {
-                if (i != (strings.length - 1)) {
-                    object = object.getJSONObject(strings[i]);
-                    if (object == null) return "";
-                } else {
-                    value = object.getString(strings[i]);
-                }
-            }
-        }
-        return value;
-    }
 
-    public static void writeExcel(List<JSONObject> files, File output) throws IOException, InvalidFormatException {
+    public static <T> void generateExcel(InputStream templateInputStream, Iterator<T> data, OutputStream outputStream) throws IOException, InvalidFormatException {
 
         // 通过类加载器获取模板
-        Workbook workbook = WorkbookFactory.create(YNoteHelper.class
-                .getResourceAsStream("/Ynote_index_tpl.xlsx"));
-        FileOutputStream fos = new FileOutputStream(output);
+        Workbook workbook = WorkbookFactory.create(templateInputStream);
         Sheet sheet = workbook.getSheetAt(0);
         Row row = sheet.getRow(1);
         CellStyle rowStyle = row.getRowStyle();
@@ -51,7 +45,16 @@ public class ExcelUtils {
         sheet.removeRow(row);
         int rowNum = 1;
 
-        for (JSONObject file : files) {
+        while (data.hasNext()) {
+            T t = data.next();
+            JSONObject item = null;
+            if (t instanceof JSONObject) {
+                item = (JSONObject) t;
+            } else {
+                String json = JSON.toJSONString(t);
+                item = JSON.parseObject(json);
+            }
+
             Row newRow = sheet.createRow(rowNum);
             newRow.setRowStyle(rowStyle);
             for (int i = 0; i < cellValues.size(); i++) {
@@ -59,13 +62,13 @@ public class ExcelUtils {
                 newCell.setCellStyle(cellStyles.get(i));
                 String newCellValue = cellValues.get(i);
                 if (newCellValue != null && cellFormatMap.containsKey(i)) {
-                    newCellValue = getJSONValue(file, cellFormatMap.get(i));
+                    newCellValue = JsonUtils.getJSONValue(item, cellFormatMap.get(i));
                 }
                 newCell.setCellValue(newCellValue);
             }
 
             rowNum++;
         }
-        workbook.write(fos);
-    }*/
+        workbook.write(outputStream);
+    }
 }
