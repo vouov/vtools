@@ -4,6 +4,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Entities;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author yuminglong@gmail.com
  * @date 2015/3/8
@@ -26,14 +29,22 @@ public class HtmlUtils {
         return doc.html();
     }
 
-    /*public static String fillImageURL(String html, String prefix, String suffix){
-        Pattern pattern = Pattern.compile("<img.*?src=\"(http://.*?)\".*?/>");
+    public static String fillImageURL(String html, String prefix, String suffix){
+        Pattern pattern = Pattern.compile("<img.*?src=\"(.*?)\".*?/>");
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
             String imageUrl = matcher.group(1);
             System.out.println("-----" + imageUrl);
-            html = html.replace(imageUrl, imageUrl);
+            StringBuilder newImageUrl = new StringBuilder();
+            if(prefix!=null){
+                newImageUrl.append(prefix);
+            }
+            newImageUrl.append(imageUrl);
+            if(suffix!=null){
+                newImageUrl.append(suffix);
+            }
+            html = html.replace(imageUrl, newImageUrl.toString());
         }
         return html;
-    }*/
+    }
 }
