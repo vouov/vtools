@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * HTML文本处理工具类
+ *
  * @author yuminglong@gmail.com
  * @date 2015/3/8
  */

@@ -10,6 +10,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import java.io.*;
 
 /**
+ * PDF文档工具类
+ *
  * @author yuminglong@gmail.com
  * @date 2015/3/4
  */

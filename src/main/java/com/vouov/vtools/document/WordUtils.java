@@ -8,6 +8,8 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import java.io.*;
 
 /**
+ * word文档处理工具类
+ *
  * @author yuminglong@gmail.com
  * @date 2015/3/4
  */

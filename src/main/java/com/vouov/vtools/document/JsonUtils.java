@@ -3,6 +3,8 @@ package com.vouov.vtools.document;
 import com.alibaba.fastjson.JSONObject;
 
 /**
+ * JSON处理工具类
+ *
  * @author yuminglong@gmail.com
  * @date 2015/3/9
  */
