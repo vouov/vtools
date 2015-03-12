@@ -6,8 +6,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -25,27 +24,18 @@ import java.util.regex.Pattern;
 public class ExcelUtils {
 
     public static <T> void generateExcel(InputStream templateInputStream, Iterator<T> data, OutputStream outputStream) throws IOException, InvalidFormatException {
-        SXSSFWorkbook newWorkbook = new SXSSFWorkbook(100); // keep 100 rows in memory, exceeding rows will be flushed to disk
-        SXSSFSheet newSheet = (SXSSFSheet) newWorkbook.createSheet();
-        SXSSFRow newHeader = (SXSSFRow) newSheet.createRow(0);
-
         // 通过类加载器获取模板
         XSSFWorkbook workbook = new XSSFWorkbook(templateInputStream);
         XSSFSheet sheet = workbook.getSheetAt(0);
-        XSSFRow header = sheet.getRow(0);
         XSSFRow row = sheet.getRow(1);
 
-        POIUtil.copyFonts(workbook, newWorkbook);
-
-        //XSSFCellStyle newRowStyle = (XSSFCellStyle) POIUtil.duplicateStyle(newWorkbook, row.getRowStyle());
         List<CellStyle> cellStyles = new ArrayList<CellStyle>();
         List<String> cellValues = new ArrayList<String>();
         Map<Integer, String> cellFormatMap = new HashMap<Integer, String>();
         Pattern pattern = Pattern.compile("^\\$\\{([\\w\\.]+)\\}$");
         for (int i = 0; i < row.getLastCellNum(); i++) {
             XSSFCell cell = row.getCell(i);
-            XSSFCellStyle newCellStyle = (XSSFCellStyle) POIUtil.duplicateStyle(newWorkbook, cell.getCellStyle());
-            cellStyles.add(newCellStyle);
+            cellStyles.add(cell.getCellStyle());
             String cellValue = cell.getStringCellValue();
             cellValues.add(cellValue);
             if (cellValue != null) {
@@ -56,11 +46,10 @@ public class ExcelUtils {
             }
         }
 
-        //sheet.removeRow(row);
+        sheet.removeRow(row);
+        SXSSFWorkbook newWorkbook = new SXSSFWorkbook(workbook); // keep 100 rows in memory, exceeding rows will be flushed to disk
+        Sheet newSheet = newWorkbook.getSheetAt(0);
         int rowNum = 1;
-        POIUtil.copySheets(newSheet, sheet);
-        POIUtil.copyRow(sheet,newSheet, header, newHeader);
-
         while (data.hasNext()) {
             T t = data.next();
             JSONObject item = null;
@@ -72,7 +61,6 @@ public class ExcelUtils {
             }
 
             Row newRow = newSheet.createRow(rowNum);
-            //newRow.setRowStyle(newRowStyle);
             for (int i = 0; i < cellValues.size(); i++) {
                 Cell newCell = newRow.createCell(i);
                 newCell.setCellStyle(cellStyles.get(i));

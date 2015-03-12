@@ -842,30 +842,4 @@ public final class POIUtil {
         Cell cell = row.getCell(cellNum.intValue(), Row.CREATE_NULL_AS_BLANK);
         return cell;
     }
-
-    public static void copyFonts(Workbook srcWorkbook, Workbook destWorkbook){
-        short destSize = destWorkbook.getNumberOfFonts();
-        short srcSize= srcWorkbook.getNumberOfFonts();
-        for(short i=0; i<srcSize; i++ ){
-            Font srcFont = srcWorkbook.getFontAt(i);
-            Font destFont =null;
-            if(i<destSize){
-                destFont = destWorkbook.getFontAt(i);
-            }else {
-                destFont = destWorkbook.createFont();
-            }
-
-            destFont.setFontName(srcFont.getFontName());
-            destFont.setFontHeight(srcFont.getFontHeight());
-            destFont.setFontHeightInPoints(srcFont.getFontHeightInPoints());
-            destFont.setItalic(srcFont.getItalic());
-            destFont.setStrikeout(srcFont.getStrikeout());
-            destFont.setColor(srcFont.getColor());
-            destFont.setTypeOffset(srcFont.getTypeOffset());
-            destFont.setUnderline(srcFont.getUnderline());
-            destFont.setCharSet(srcFont.getCharSet());
-            destFont.setBoldweight(srcFont.getBoldweight());
-            destFont.setBold(srcFont.getBold());
-        }
-    }
 }
