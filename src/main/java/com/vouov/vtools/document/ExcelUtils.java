@@ -18,11 +18,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Excel工具类
+ *
  * @author yuminglong@gmail.com
  * @date 2015/3/4
  */
 public class ExcelUtils {
 
+    /**
+     * 根据Excel模板导出数据,支持大数据导出
+     *
+     * @param templateInputStream
+     * @param data
+     * @param outputStream
+     * @param <T>
+     * @throws IOException
+     * @throws InvalidFormatException
+     */
     public static <T> void generateExcel(InputStream templateInputStream, Iterator<T> data, OutputStream outputStream) throws IOException, InvalidFormatException {
         // 通过类加载器获取模板
         XSSFWorkbook workbook = new XSSFWorkbook(templateInputStream);
