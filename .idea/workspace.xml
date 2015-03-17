@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ede06b54-b843-4a96-8507-a1ae8d83c65b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/ExcelUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/ExcelUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vtools.iws" />
@@ -35,18 +34,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ExcelUtils.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/ExcelUtils.java">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.86919105" vertical-offset="1167" max-vertical-offset="1824">
-              <caret line="88" column="5" selection-start-line="27" selection-start-column="4" selection-end-line="88" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1321#1332#0" expanded="true" />
-                <element signature="e#1383#1391#0" expanded="true" />
-                <element signature="e#1451#1468#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.4937833" vertical-offset="444" max-vertical-offset="1007">
+              <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -74,16 +71,16 @@
         <option value="$PROJECT_DIR$/src/test/java/com/vouov/vtools/common/StringUtilsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/vouov/vtools/document/HtmlUtilsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/vouov/vtools/document/WordUtilsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/WordUtils.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/vouov/vtools/document/PdfUtilsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/HtmlUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/PdfUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/JsonUtils.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/com/vouov/vtools/document/ExcelUtilsTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/POIUtil.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/ExcelUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/HtmlUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/JsonUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/PdfUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/WordUtils.java" />
       </list>
     </option>
   </component>
@@ -643,7 +640,7 @@
       <workItem from="1425866375681" duration="12813000" />
       <workItem from="1425953876558" duration="10235000" />
       <workItem from="1426058038731" duration="9511000" />
-      <workItem from="1426125200576" duration="12221000" />
+      <workItem from="1426125200576" duration="12621000" />
     </task>
     <task id="LOCAL-00001" summary="add new RSA cypto tools">
       <created>1425632083292</created>
@@ -675,11 +672,17 @@
       <option name="project" value="LOCAL" />
       <updated>1426141154563</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add class comment">
+      <created>1426153169957</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1426153169957</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116042000" />
+    <option name="totallyTimeSpent" value="116442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -734,7 +737,8 @@
     <MESSAGE value="convert html to pdf document" />
     <MESSAGE value="generate excel document by excel template" />
     <MESSAGE value="update excel document by excel template &#10;support big data" />
-    <option name="LAST_COMMIT_MESSAGE" value="update excel document by excel template &#10;support big data" />
+    <MESSAGE value="add class comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="add class comment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -747,35 +751,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="106" max-vertical-offset="741">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.11/poi-3.11-sources.jar!/org/apache/poi/ss/usermodel/DateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5050504" vertical-offset="2424" max-vertical-offset="12464">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.11/poi-3.11-sources.jar!/org/apache/poi/hssf/usermodel/HSSFDateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25589225" vertical-offset="0" max-vertical-offset="594">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.11/poi-3.11-sources.jar!/org/apache/poi/ss/util/AreaReference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19621342" vertical-offset="0" max-vertical-offset="6878">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.11/poi-3.11-sources.jar!/org/apache/poi/util/IOUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.5420876" vertical-offset="2218" max-vertical-offset="2812">
@@ -1123,18 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/POIUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.25645438" vertical-offset="6476" max-vertical-offset="16169">
-          <caret line="333" column="23" selection-start-line="333" selection-start-column="23" selection-end-line="333" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#23410#23411#0" expanded="true" />
-            <element signature="e#23479#23480#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/vouov/vtools/document/ExcelUtilsTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4074074" vertical-offset="0" max-vertical-offset="1007">
@@ -1145,21 +1108,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/HtmlUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5275311" vertical-offset="425" max-vertical-offset="1007">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.15993266" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/ExcelUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86919105" vertical-offset="1167" max-vertical-offset="1824">
-          <caret line="88" column="5" selection-start-line="27" selection-start-column="4" selection-end-line="88" selection-end-column="5" />
+        <state vertical-scroll-proportion="2.060241" vertical-offset="285" max-vertical-offset="1824">
+          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1321#1332#0" expanded="true" />
@@ -1167,6 +1127,51 @@
             <element signature="e#1451#1468#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/POIUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.829604" vertical-offset="35" max-vertical-offset="16131">
+          <caret line="333" column="23" selection-start-line="333" selection-start-column="23" selection-end-line="333" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/PdfUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19621342" vertical-offset="0" max-vertical-offset="1634">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/JsonUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15993266" vertical-offset="0" max-vertical-offset="779">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vouov/vtools/document/WordUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15993266" vertical-offset="0" max-vertical-offset="1710">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4937833" vertical-offset="444" max-vertical-offset="1007">
+          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
